@@ -96,7 +96,6 @@
 
 .field mLastNITZTimeInfo:[Ljava/lang/Object;
 
-.field private mMetrics:Lcom/android/internal/telephony/metrics/TelephonyMetrics;
 
 .field volatile mMtkRadioProxy:Lvendor/mediatek/hardware/mtkradioex/V2_0/IMtkRadioEx;
 
@@ -225,11 +224,6 @@
     iput-object v1, p0, Lcom/mediatek/ims/ril/ImsRILAdapter;->mTestingEmergencyCall:Ljava/util/concurrent/atomic/AtomicBoolean;
 
     .line 369
-    invoke-static {}, Lcom/android/internal/telephony/metrics/TelephonyMetrics;->getInstance()Lcom/android/internal/telephony/metrics/TelephonyMetrics;
-
-    move-result-object v1
-
-    iput-object v1, p0, Lcom/mediatek/ims/ril/ImsRILAdapter;->mMetrics:Lcom/android/internal/telephony/metrics/TelephonyMetrics;
 
     .line 376
     new-instance v1, Lcom/mediatek/ims/ril/ImsRILAdapter$DtmfQueueHandler;
@@ -542,15 +536,6 @@
     return-object v0
 .end method
 
-.method static synthetic access$300(Lcom/mediatek/ims/ril/ImsRILAdapter;)Lcom/android/internal/telephony/metrics/TelephonyMetrics;
-    .locals 1
-    .param p0, "x0"    # Lcom/mediatek/ims/ril/ImsRILAdapter;
-
-    .line 314
-    iget-object v0, p0, Lcom/mediatek/ims/ril/ImsRILAdapter;->mMetrics:Lcom/android/internal/telephony/metrics/TelephonyMetrics;
-
-    return-object v0
-.end method
 
 .method static synthetic access$400(Lcom/mediatek/ims/ril/ImsRILAdapter;Lcom/mediatek/ims/ril/RILRequest;)V
     .locals 0
@@ -5554,17 +5539,6 @@
     invoke-interface {v0, v2}, Landroid/hardware/radio/V1_0/IRadio;->acceptCall(I)V
 
     .line 974
-    iget-object v2, p0, Lcom/mediatek/ims/ril/ImsRILAdapter;->mMetrics:Lcom/android/internal/telephony/metrics/TelephonyMetrics;
-
-    iget-object v3, p0, Lcom/mediatek/ims/ril/ImsRILAdapter;->mPhoneId:Ljava/lang/Integer;
-
-    invoke-virtual {v3}, Ljava/lang/Integer;->intValue()I
-
-    move-result v3
-
-    iget v4, v1, Lcom/mediatek/ims/ril/RILRequest;->mSerial:I
-
-    invoke-virtual {v2, v3, v4}, Lcom/android/internal/telephony/metrics/TelephonyMetrics;->writeRilAnswer(II)V
     :try_end_0
     .catch Landroid/os/RemoteException; {:try_start_0 .. :try_end_0} :catch_0
     .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0
@@ -9358,23 +9332,6 @@
     .line 3581
     :cond_1
     :goto_0
-    iget-object v1, p0, Lcom/mediatek/ims/ril/ImsRILAdapter;->mMetrics:Lcom/android/internal/telephony/metrics/TelephonyMetrics;
-
-    iget-object v0, p0, Lcom/mediatek/ims/ril/ImsRILAdapter;->mPhoneId:Ljava/lang/Integer;
-
-    invoke-virtual {v0}, Ljava/lang/Integer;->intValue()I
-
-    move-result v2
-
-    iget v3, p1, Lcom/mediatek/ims/ril/RILRequest;->mSerial:I
-
-    iget v4, p2, Landroid/hardware/radio/V1_0/RadioResponseInfo;->error:I
-
-    iget v5, p1, Lcom/mediatek/ims/ril/RILRequest;->mRequest:I
-
-    move-object v6, p3
-
-    invoke-virtual/range {v1 .. v6}, Lcom/android/internal/telephony/metrics/TelephonyMetrics;->writeOnRilSolicitedResponse(IIIILjava/lang/Object;)V
 
     .line 3584
     iget v0, p1, Lcom/mediatek/ims/ril/RILRequest;->mRequest:I
@@ -11574,36 +11531,6 @@
     invoke-interface {v4, v9, v6}, Lvendor/mediatek/hardware/mtkradioex/V2_0/IMtkRadioEx;->sendImsSmsEx(ILandroid/hardware/radio/V1_0/ImsSmsMessage;)V
 
     .line 3741
-    iget-object v9, v1, Lcom/mediatek/ims/ril/ImsRILAdapter;->mMetrics:Lcom/android/internal/telephony/metrics/TelephonyMetrics;
-
-    iget-object v14, v1, Lcom/mediatek/ims/ril/ImsRILAdapter;->mPhoneId:Ljava/lang/Integer;
-
-    invoke-virtual {v14}, Ljava/lang/Integer;->intValue()I
-
-    move-result v14
-
-    iget v15, v5, Lcom/mediatek/ims/ril/RILRequest;->mSerial:I
-
-    const/4 v10, 0x3
-
-    .line 3742
-    invoke-virtual {v0, v2}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
-
-    move-result v0
-
-    if-eqz v0, :cond_1
-
-    .line 3743
-    goto :goto_1
-
-    .line 3744
-    :cond_1
-    const/4 v11, 0x2
-
-    .line 3741
-    :goto_1
-    move-object/from16 v1, p0
-    invoke-direct {v1, v14, v15, v10, v11}, Lcom/mediatek/ims/ril/ImsRILAdapter;->writeRilSendSms(IIII)V
     :try_end_0
     .catch Landroid/os/RemoteException; {:try_start_0 .. :try_end_0} :catch_0
     .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0
